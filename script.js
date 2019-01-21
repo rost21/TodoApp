@@ -1,3 +1,4 @@
+//генерация id
 const generateId = () => {
     return Math.floor(Math.random() * 1000000);
   };
@@ -58,6 +59,7 @@ const generateId = () => {
     }
 ];
 
+//удаление dashboard'a
 function deleteDashboard(id){
     
     console.log("Before: ")
@@ -81,6 +83,7 @@ function deleteDashboard(id){
     
 }
 
+//удаление task'a
 function deleteTask(id) {
     console.log("Before: ")
     console.log(arr);
@@ -103,13 +106,14 @@ function deleteTask(id) {
     createDashboard();
 }
 
+//при активном чекбоксе перечеркивание название task'a
 function changeCheckbox(e) {
     (e.checked == true) ? e.nextSibling.nextSibling.firstChild.style.textDecoration = "line-through" : e.nextSibling.nextSibling.firstChild.style.textDecoration = "none";
     console.log(e.nextSibling.nextSibling.firstChild);
 
 }
 
-
+//показать sidebar
 function showAddSidebar(){
     var blockAdd = document.querySelector("#block-add");
 
@@ -120,6 +124,7 @@ function showAddSidebar(){
     }
 }
 
+//скрыть sidebar
 function hideAddSidebar(){    
     var blockAdd = document.querySelector("#block-add");
 
@@ -130,6 +135,7 @@ function hideAddSidebar(){
     }
 }
 
+//добавить dashboard
 function addDashboard() {
     var addTitle = document.querySelector("#add-title").value;
     var addTask = document.querySelector("#add-task").value;
@@ -161,9 +167,7 @@ function addDashboard() {
     document.querySelector("#add-task").value = "";
 }
 
-
-
-
+//изменить название dashboard'a
 function changeTitle(e,id){
 
     var newTitle = e.value;
@@ -183,6 +187,7 @@ function changeTitle(e,id){
 
 }
 
+//добавить task
 function addTask(e,id){
 
     if(e.value !== "") {
@@ -217,7 +222,7 @@ function addTask(e,id){
 
 }
 
-
+//изменить название task'a
 function changeTask(e,id){
     console.log(e.value);
     console.log(id);
@@ -233,6 +238,7 @@ function changeTask(e,id){
     console.log(arr);
 }
 
+//прорисовка всех dashboard'ов
 function createDashboard(){
 
     arr.forEach((item,i)=>  {
