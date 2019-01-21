@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body onload="createDashboard()">
+        <div id="block-main">
+                <div id="block-header">
+                    <div><img src="images/DI.png" width="55px" height="35px"/></div>
+                    <div class="text-Todo">To</div>
+                    <div id="hr"></div>
+                    <div class="text-Todo">do</div>
+                  </div>
+                <div id="block-content">
+                   
+                    
+                </div>
+                <div id="plus" onclick="showAddSidebar()"><img src="images/plus.png" width="60px" height="60px" /></div>
+
+                
+            </div>
+
+            <div id="block-add" style="display: none;">
+                <div id="x-mark" onclick="hideAddSidebar()"><img src="images/cross-out-mark.png" width="23px" height="23px"/></div>
+                <input type="text" id="add-title" placeholder="Add title">
+                <input type="text" id="add-task" placeholder="Add to-do"/>
+                <div id="button-add" onclick="addDashboard()">Add</div>
+            </div>
+            
+</body>
+<script src="script.js"></script>
+</html>

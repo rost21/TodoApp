@@ -1,0 +1,224 @@
+body {
+    background-color: #F3F4F6;
+    font-family:'Open Sans', Arial, sans-serif;
+    font-size: 12px;
+    list-style: none;
+}
+#block-main {
+    width: 1185px;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 37px;
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-flex-flow: row wrap;
+    justify-content: space-between;
+    z-index: 1;
+}
+
+#block-header {
+    width: 1184px;
+    height: 35px;
+    
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    
+    -webkit-flex-flow: row wrap;
+    justify-content: space-between;
+  }
+  
+  #hr {
+    width: 1015px;
+    height: 6px;
+    background-color: black;
+    margin-top: 15px;
+  }
+  
+  .text-Todo {
+    font-family:'Open Sans', Arial, sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    margin-top: -5px;
+  }
+
+#block-content {
+    width: 1185px;
+    height: auto;
+    margin-top: 50px;
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.block-item {
+    background: white;
+    padding: 26px;
+    width: 530px;
+    height: auto;
+    margin-bottom: 25px;
+    border-radius: 7px;
+}
+
+.item-name {
+    font-family:'Open Sans', Arial, sans-serif;
+    width: 500px;
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+    display: inline-block;
+    margin-top: -10px;
+    outline: none;
+    border: none;
+}
+
+.item-name:focus {
+    border-bottom: 1px solid black;
+}
+
+.add-task {
+    width: 500px;
+}
+
+
+
+.add-todo {
+    font-size: 20px;
+    color: #808080;
+    display: inline-block;
+    margin-top: 10px;
+    cursor: pointer;
+    outline: none;
+    border: none;
+}
+
+.add-todo:focus {
+   border-bottom: 1px solid #808080;
+}
+
+.trash-icon {
+    display: inline-block;
+    margin-left: 523px;
+    margin-top: -10px;
+    cursor: pointer;
+}
+
+#plus {
+    display: inline-block;
+    margin-left: 1125px;
+    margin-top: 100px;
+    cursor: pointer;
+}
+
+.tasks {
+    width: 520px;
+    height: auto;
+    margin-top: 10px;
+}
+
+.task-name {
+    font-family:'Open Sans', Arial, sans-serif;
+    font-size: 20px;
+    color: #808080;
+    margin-bottom: 5px;
+    display: inline-block;
+    background-color: white;
+    border: none;
+    outline: none;
+}
+
+.delete-task {
+    width: 35px;
+    height: 25px;
+    opacity: 0;
+    text-align: center;
+    margin-left: 500px;
+    margin-top: -20px;
+    display: block;
+    cursor: pointer;
+}
+
+.task:hover .delete-task {
+    opacity: 1;
+  }
+
+#block-add {
+    width: 580px;
+    min-height: 700px;
+    z-index: 100;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: white;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: flex-start;
+
+}
+
+#x-mark {
+    align-self: flex-end;
+    margin-top: 40px;
+    margin-right: 40px;
+    cursor: pointer;
+}
+
+#add-title {
+    margin-top: 20px;
+    border: none;
+    width: 550px;
+    height: 25px;
+    margin-left: 20px;
+    outline: none;
+    font-size: 23px;
+    font-weight: bold;
+    color: #808080;
+}
+
+#add-task {
+    margin-top: 20px;
+    border: none;
+    width: 550px;
+    height: 25px;
+    margin-left: 20px;
+    outline: none;
+    font-size: 20px;
+    color: #808080;
+}
+
+#add-title:focus {
+    border-bottom: 1px solid black;
+}
+
+#add-task:focus {
+    border-bottom: 1px solid black;
+}
+
+#button-add {
+    position: absolute;
+    bottom: 0;
+    width: 580px;
+    height: 60px;
+    color: white;
+    background-color: black;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+    line-height: 60px;
+}
+
