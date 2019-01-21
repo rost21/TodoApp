@@ -140,7 +140,7 @@ function addDashboard() {
         tasks: [
             {
                 task_id: generateId(),
-                selected: true,
+                selected: false,
                 name: addTask,
             }
         ],
