@@ -2,75 +2,20 @@ const generateId = () => {
     return Math.floor(Math.random() * 1000000);
   };
 
-  var arr = [
-    {
-        item_id: generateId(),
-        title: 'title01',
-        tasks: [
-            {
-                task_id: generateId(),
-                selected: false,
-                name: 'task01',
-            },
-            {
-                task_id: generateId(),
-                selected: false,
-                name: 'task02',
-            }
-        ],
-    },
-    {
-        item_id: generateId(),
-        title: 'title02',
-        tasks: [
-            {
-                task_id: generateId(),
-                selected: false,
-                name: 'task11',
-            },
-            {
-                task_id: generateId(),
-                selected: false,
-                name: 'task12',
-            },
-            {
-                task_id: generateId(),
-                selected: false,
-                name: 'task13',
-            },
-            {
-                task_id: generateId(),
-                selected: false,
-                name: 'task14',
-            }
-        ],
-    },
-    {
-        item_id: generateId(),
-        title: 'title03',
-        tasks: [
-            {
-                task_id: generateId(),
-                selected: false,
-                name: 'task21',
-            }
-        ],
-    }
-];
-
 function deleteDashboard(id){
-    
-    console.log("Before: ")
-    console.log(arr);
+
     console.log("id: "+id);
- 
-    arr.forEach(function(item){
-        arr = arr.filter(item => item.item_id != id);
+    var get = localStorage.getItem('arr');
+    var array = JSON.parse(get);
+
+    array.forEach((item) => {
+        array = array.filter(item => item.item_id != id);
     });
     
-
     console.log("After: ");
-    console.log(arr);
+    console.log(array);
+
+    localStorage.setItem('arr', JSON.stringify(array));
 
     var blockContent = document.querySelector("#block-content");
     while (blockContent.firstChild) {
@@ -78,22 +23,23 @@ function deleteDashboard(id){
     }
    
     createDashboard();
-    
 }
 
 function deleteTask(id) {
-    console.log("Before: ")
-    console.log(arr);
     console.log("id: "+id);
+    var get = localStorage.getItem('arr');
+    var array = JSON.parse(get);
 
-    arr.forEach(function(item){
-        item.tasks.forEach((task)=> {
+    array.forEach(item =>{
+        item.tasks.forEach(task => {
             item.tasks = item.tasks.filter(task => task.task_id != id);
         });
     });
 
     console.log("After: ");
-    console.log(arr);
+    console.log(array);
+
+    localStorage.setItem('arr',JSON.stringify(array));
 
     var blockContent = document.querySelector("#block-content");
     while (blockContent.firstChild) {
@@ -106,9 +52,7 @@ function deleteTask(id) {
 function changeCheckbox(e) {
     (e.checked == true) ? e.nextSibling.nextSibling.firstChild.style.textDecoration = "line-through" : e.nextSibling.nextSibling.firstChild.style.textDecoration = "none";
     console.log(e.nextSibling.nextSibling.firstChild);
-
 }
-
 
 function showAddSidebar(){
     var blockAdd = document.querySelector("#block-add");
@@ -134,7 +78,10 @@ function addDashboard() {
     var addTitle = document.querySelector("#add-title").value;
     var addTask = document.querySelector("#add-task").value;
 
-    arr.push({
+    var get = localStorage.getItem('arr');
+    var array = JSON.parse(get);
+
+    array.push({
         item_id: generateId(),
         title: addTitle,
         tasks: [
@@ -145,9 +92,12 @@ function addDashboard() {
             }
         ],
     });
-    console.log("After:");
-    console.log(arr);
 
+    
+    console.log("After:");
+    console.log(array);
+
+    localStorage.setItem('arr',JSON.stringify(array));
     hideAddSidebar();
 
     var blockContent = document.querySelector("#block-content");
@@ -161,26 +111,21 @@ function addDashboard() {
     document.querySelector("#add-task").value = "";
 }
 
-
-
-
 function changeTitle(e,id){
-
-    var newTitle = e.value;
     console.log(id);
+    var get = localStorage.getItem('arr');
+    var array = JSON.parse(get);
 
-   arr.forEach((item) => {
-    if(item.item_id == id) {
-        var oldTitle = item.title;
-        console.log(oldTitle);
-        console.log(newTitle);
-        item.title = e.value;   
-    }
-   });
+    array.map((item) => {
+        if(item.item_id == id) { 
+            return Object.assign(item, {title: e.value});
+        }
+        return item;
+    });
    
-  console.log("After:");
-  console.log(arr);
-
+    console.log("After:");
+    console.log(array);
+    localStorage.setItem('arr',JSON.stringify(array));
 }
 
 function addTask(e,id){
@@ -188,25 +133,23 @@ function addTask(e,id){
     if(e.value !== "") {
         console.log(e.value);
         console.log(id);
+        var get = localStorage.getItem('arr');
+        var array = JSON.parse(get);
 
-        arr.forEach((item) => {
+        array.map((item) => {
             if(item.item_id == id) {
-
-                    item.tasks.push({
+                    return item.tasks.push({
                         task_id: generateId(),
                         selected: false,
                         name: e.value,
-                    })
+                    });
             }
+            return item;
         });
-    }
-    //e.value ="";
-    /*var task= new DOMParser().parseFromString(`
-            <input type="text" class="add-task" />
-            `,"text/html").body.firstChild;
 
-    document.querySelector(".tasks").insertBefore(task,document.querySelector(e));
-    */
+        console.log(array);
+        localStorage.setItem('arr', JSON.stringify(array));
+    }
     
    var blockContent = document.querySelector("#block-content");
    while (blockContent.firstChild) {
@@ -214,28 +157,51 @@ function addTask(e,id){
    }
   
    createDashboard();
-
 }
-
 
 function changeTask(e,id){
     console.log(e.value);
     console.log(id);
+    var get = localStorage.getItem('arr');
+    var array = JSON.parse(get);
 
-    arr.forEach((item) => {
-        item.tasks.forEach((task) => {
-            if(task.task_id == id)
-                task.name = e.value; 
+    array.map(item => {
+        item.tasks.map(task => {
+            if (task.task_id == id){
+                return Object.assign(task, {name : e.value});
+            }
+            return task;
         });
+        return item;
     });
 
     console.log("After:");
-    console.log(arr);
+    console.log(array);
+    localStorage.setItem('arr', JSON.stringify(array));
 }
 
 function createDashboard(){
 
-    arr.forEach((item,i)=>  {
+    if(JSON.parse(localStorage.getItem('arr')) == null ) {
+        localStorage.setItem('arr', JSON.stringify([
+            {
+                item_id: generateId(),
+                title: 'title01',
+                tasks: [
+                    {
+                        task_id: generateId(),
+                        selected: false,
+                        name: 'task01',
+                    },
+                ]
+            }
+        ]));
+    } else {
+        var get = localStorage.getItem('arr');
+        var array = JSON.parse(get);
+    }
+    
+    array.forEach((item)=>  {
         var html= new DOMParser().parseFromString(`
             <div class="block-item" id="${item.item_id}">
                 <div class="trash-icon"  onclick="deleteDashboard(${item.item_id})"><img src="images/trash.png" width="19px" height="19px"/></div><br/>
@@ -270,6 +236,4 @@ function createDashboard(){
 
         document.querySelector("#block-content").appendChild(html);
     });
-
 }
-
