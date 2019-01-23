@@ -9,7 +9,7 @@ function deleteDashboard(id){
     var get = localStorage.getItem('arr');
     var array = JSON.parse(get);
 
-    array.forEach((item) => {
+    array.forEach(item => {
         array = array.filter(item => item.item_id != id);
     });
     
@@ -52,10 +52,30 @@ function deleteTask(id) {
 }
 
 //при активном чекбоксе перечеркивание название task'a
-function changeCheckbox(e) {
-    (e.checked == true) ? e.nextSibling.nextSibling.firstChild.style.textDecoration = "line-through" : e.nextSibling.nextSibling.firstChild.style.textDecoration = "none";
-    console.log(e.nextSibling.nextSibling.firstChild);
+function changeCheckbox(e,id) {
+    //(e.checked == true) ? e.nextSibling.nextSibling.firstChild.style.textDecoration = "line-through" : e.nextSibling.nextSibling.firstChild.style.textDecoration = "none";
+    //console.log(e);
+    (e.checked == true) ? e.nextSibling.nextSibling.firstChild.classList.add("task-name-active") : e.nextSibling.nextSibling.firstChild.classList.remove("task-name-active");
+    //console.log(e.nextSibling.nextSibling.firstChild);
+    console.log(e.checked);
+    console.log(id);
+    var get = localStorage.getItem('arr');
+    var array = JSON.parse(get);
+
+    array.map(item => {
+        item.tasks.map(task => {
+            if (task.task_id == id){
+                return Object.assign(task, {selected : e.checked});
+            }
+            return task;
+        });
+        return item;
+    });
+
+    localStorage.setItem('arr',JSON.stringify(array));
+    console.log(array);
 }
+
 
 //показать sidebar
 function showAddSidebar(){
@@ -188,6 +208,9 @@ function changeTask(e,id){
     console.log(array);
     localStorage.setItem('arr', JSON.stringify(array));
 }
+function checkCheckbox(e) {
+    console.log(e.selected);
+}
 
 //прорисовка всех dashboard'ов
 function createDashboard(){
@@ -228,13 +251,17 @@ function createDashboard(){
             var checked;
 
             if(item.tasks[j].selected == true){
-                checked ='checked';
+                checked ='checked'
             } else {
                 checked = '';
             }
             var task = new DOMParser().parseFromString(`
             <div class="task">
-                <input type="checkbox" id="${item.tasks[j].task_id}" ${checked} onchange="changeCheckbox(this)"  >
+                <input type="checkbox"
+                 id="${item.tasks[j].task_id}" 
+                 ${checked} onchange="changeCheckbox(this,${item.tasks[j].task_id})" 
+                 onload="checkCheckbox(this)"  
+                />
                 
                 <label for="${item.tasks[j].task_id}" ><input class="task-name" type="text" value="${item.tasks[j].name}" onblur="changeTask(this,${item.tasks[j].task_id})" /></label><br/>
                 <div class="delete-task" onclick="deleteTask(${item.tasks[j].task_id})" ><img src="images/trash.png" width="19px" height="19px"/></div>
